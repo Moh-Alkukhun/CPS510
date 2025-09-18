@@ -1,0 +1,76 @@
+cells:
+  - kind: 2
+    value: "CREATE TABLE Servers (\r
+
+      \    server_id INT PRIMARY KEY,\r
+
+      \    server_name VARCHAR(255) NOT NULL,\r
+
+      \    model VARCHAR(255) NOT NULL,\r
+
+      \    processor_type VARCHAR(255),\r
+
+      \    ram INT,\r
+
+      \    storage INT,\r
+
+      \    status VARCHAR(50),\r
+
+      \    location VARCHAR(255)\r
+
+      );\r
+
+      \r
+
+      CREATE TABLE Performance_Metrics (\r
+
+      \    metric_id INT PRIMARY KEY,\r
+
+      \    server_id INT,\r
+
+      \    metric_type VARCHAR(50),\r
+
+      \    metric_value VARCHAR(50),\r
+
+      \    timestamp TIMESTAMP,\r
+
+      \    FOREIGN KEY (server_id) REFERENCES Servers(server_id)\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE Environmental_Sensors (\r
+
+      \    sensor_id INT PRIMARY KEY,\r
+
+      \    sensor_type VARCHAR(50),\r
+
+      \    sensor_value VARCHAR(50),\r
+
+      \    location VARCHAR(255),\r
+
+      \    timestamp TIMESTAMP\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT table_name FROM user_tables;
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE Environmental_Sensors (\r
+
+      \    sensor_id INT PRIMARY KEY,\r
+
+      \    sensor_type VARCHAR(50),\r
+
+      \    sensor_value VARCHAR(50),\r
+
+      \    location VARCHAR(255),\r
+
+      \    timestamp TIMESTAMP\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
