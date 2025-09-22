@@ -18,11 +18,10 @@ cells:
 
       \    location VARCHAR(255)\r
 
-      );\r
-
-      \r
-
-      CREATE TABLE Performance_Metrics (\r
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE Performance_Metrics (\r
 
       \    metric_id INT PRIMARY KEY,\r
 
@@ -54,23 +53,124 @@ cells:
       );"
     languageId: oracle-sql
   - kind: 2
-    value: SELECT table_name FROM user_tables;
+    value: "CREATE TABLE Alerts (\r
+
+      \    alert_id INT,\r
+
+      \    alert_type VARCHAR(50),\r
+
+      \    severity VARCHAR(20),\r
+
+      \    description VARCHAR(255),\r
+
+      \    timestamp TIMESTAMP,\r
+
+      \    status VARCHAR(20)\r
+
+      );\r\n"
     languageId: oracle-sql
   - kind: 2
-    value: "CREATE TABLE Environmental_Sensors (\r
+    value: "ALTER TABLE Alerts\r
 
-      \    sensor_id INT PRIMARY KEY,\r
+      ADD CONSTRAINT pk_alert_id PRIMARY KEY (alert_id);"
+    languageId: oracle-sql
+  - kind: 2
+    value: "ALTER TABLE Alerts\r
 
-      \    sensor_type VARCHAR(50),\r
+      ADD server_id INT;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "ALTER TABLE Alerts\r
 
-      \    sensor_value VARCHAR(50),\r
+      ADD CONSTRAINT fk_server_id FOREIGN KEY (server_id)\r
 
-      \    location VARCHAR(255),\r
+      REFERENCES Servers(server_id);"
+    languageId: oracle-sql
+  - kind: 2
+    value: DESC MAINTENANCE;
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE Maintenance (\r
 
-      \    timestamp TIMESTAMP\r
+      \    maintenance_id INT,\r
+
+      \    server_id INT,\r
+
+      \    maintenance_type VARCHAR(50),\r
+
+      \    user_id INT,\r
+
+      \    status VARCHAR(20),\r
+
+      \    timestamp TIMESTAMP,\r
+
+      \    notes VARCHAR(255)\r
+
+      );\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "ALTER TABLE Maintenance\r
+
+      ADD CONSTRAINT pk_maintenance_id PRIMARY KEY (maintenance_id);"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Users Table\r
+
+      CREATE TABLE Users (\r
+
+      \    user_id INT PRIMARY KEY,\r
+
+      \    name VARCHAR(100),\r
+
+      \    email VARCHAR(100),\r
+
+      \    role VARCHAR(50),\r
+
+      \    access_level VARCHAR(50)\r
 
       );"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "-- See all tables you own\r
+
+      SELECT table_name FROM user_tables;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT \r
+
+      \    a.table_name AS \"Table Name\", \r
+
+      \    a.column_name AS \"Column Name\", \r
+
+      \    c.constraint_name AS \"Constraint Name\", \r
+
+      \    c.r_constraint_name AS \"Referenced Constraint Name\",\r
+
+      \    b.table_name AS \"Referenced Table\", \r
+
+      \    b.column_name AS \"Referenced Column\"\r
+
+      FROM \r
+
+      \    user_cons_columns a\r
+
+      JOIN \r
+
+      \    user_constraints c \r
+
+      \    ON a.constraint_name = c.constraint_name\r
+
+      JOIN \r
+
+      \    user_cons_columns b\r
+
+      \    ON c.r_constraint_name = b.constraint_name\r
+
+      WHERE \r
+
+      \    c.constraint_type = 'R'  -- 'R' stands for Foreign Key\r
+
+      ORDER BY \r
+
+      \    a.table_name, a.column_name;\r\n"
     languageId: oracle-sql
