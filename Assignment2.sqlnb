@@ -21,6 +21,12 @@ cells:
       );"
     languageId: oracle-sql
   - kind: 2
+    value: "ALTER TABLE Servers\r
+
+      ADD CONSTRAINT chk_statue CHECK (status IN ('active', 'inactive',
+      'maintenance'));"
+    languageId: oracle-sql
+  - kind: 2
     value: "CREATE TABLE Performance_Metrics (\r
 
       \    metric_id INT PRIMARY KEY,\r
@@ -114,6 +120,20 @@ cells:
       ADD CONSTRAINT pk_maintenance_id PRIMARY KEY (maintenance_id);"
     languageId: oracle-sql
   - kind: 2
+    value: "ALTER TABLE Maintenance\r
+
+      ADD CONSTRAINT fk_maintenance_server_id FOREIGN KEY (SERVER_ID)\r
+
+      REFERENCES Servers(server_id);"
+    languageId: oracle-sql
+  - kind: 2
+    value: "ALTER TABLE Maintenance\r
+
+      ADD CONSTRAINT fk_user_id FOREIGN KEY (USER_ID)\r
+
+      REFERENCES Users(user_id);"
+    languageId: oracle-sql
+  - kind: 2
     value: "--Users Table\r
 
       CREATE TABLE Users (\r
@@ -138,17 +158,20 @@ cells:
   - kind: 2
     value: "SELECT \r
 
-      \    a.table_name AS \"Table Name\", \r
+      \    a.table_name AS \"Foreign Key Table\",       -- Table containing the
+      foreign key\r
 
-      \    a.column_name AS \"Column Name\", \r
+      \    a.column_name AS \"Foreign Key Column\",     -- Column in that
+      table\r
 
-      \    c.constraint_name AS \"Constraint Name\", \r
+      \    c.constraint_name AS \"Constraint Name\",    -- Name of the foreign
+      key constraint\r
 
-      \    c.r_constraint_name AS \"Referenced Constraint Name\",\r
+      \    b.table_name AS \"Referenced Table\",        -- Table being
+      referenced\r
 
-      \    b.table_name AS \"Referenced Table\", \r
-
-      \    b.column_name AS \"Referenced Column\"\r
+      \    b.column_name AS \"Referenced Column\"       -- Column being
+      referenced\r
 
       FROM \r
 
@@ -156,21 +179,31 @@ cells:
 
       JOIN \r
 
-      \    user_constraints c \r
-
-      \    ON a.constraint_name = c.constraint_name\r
+      \    user_constraints c ON a.constraint_name = c.constraint_name\r
 
       JOIN \r
 
-      \    user_cons_columns b\r
-
-      \    ON c.r_constraint_name = b.constraint_name\r
+      \    user_cons_columns b ON c.r_constraint_name = b.constraint_name\r
 
       WHERE \r
 
-      \    c.constraint_type = 'R'  -- 'R' stands for Foreign Key\r
+      \    c.constraint_type = 'R'    -- 'R' = foreign key\r
 
       ORDER BY \r
 
       \    a.table_name, a.column_name;\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * FROM SERVERS;
+    languageId: oracle-sql
+  - kind: 2
+    value: "INSERT INTO Users (user_id, name, email, access_level)\r
+
+      VALUES (1, 'Zein', 'zeinAlasali@gmail.com', 'Full Access');\r
+
+      \r
+
+      INSERT INTO Users (user_id, name, email, access_level)\r
+
+      VALUES (2, 'Abdul', 'hello@gmail.com', 'Limited Access');\r\n"
     languageId: oracle-sql
