@@ -194,16 +194,14 @@ cells:
       \    a.table_name, a.column_name;\r\n"
     languageId: oracle-sql
   - kind: 2
-    value: SELECT * FROM SERVERS;
+    value: "--Show the tables inside of the entity+values\r
+
+      SELECT * FROM MAINTENANCE;"
     languageId: oracle-sql
   - kind: 2
-    value: "INSERT INTO Users (user_id, name, email, access_level)\r
+    value: "INSERT INTO Performance_Metrics (metric_id, server_id, metric_type,
+      metric_value, timestamp)\r
 
-      VALUES (1, 'Zein', 'zeinAlasali@gmail.com', 'Full Access');\r
-
-      \r
-
-      INSERT INTO Users (user_id, name, email, access_level)\r
-
-      VALUES (2, 'Abdul', 'hello@gmail.com', 'Limited Access');\r\n"
+      VALUES (1, 1, 'CPU Usage', 75, TO_TIMESTAMP('2025-09-21 10:00:00',
+      'YYYY-MM-DD HH24:MI:SS'));"
     languageId: oracle-sql
