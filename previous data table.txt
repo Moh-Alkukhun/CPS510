@@ -1,0 +1,77 @@
+ALERT TABLE: {"results":[{"columns":[{"name":"ALERT_ID","type":"NUMBER"},{"name":"ALERT_TYPE","type":"VARCHAR2"},{"name":"SEVERITY","type":"VARCHAR2"},{"name":"DESCRIPTION","type":"VARCHAR2"},{"name":"TIMESTAMP","type":"TIMESTAMP"},{"name":"STATUS","type":"VARCHAR2"},{"name":"SERVER_ID","type":"NUMBER"}],"items":
+[
+{"alert_id":7001,"alert_type":"Power","severity":"Critical","description":"Unexpected power loss detected in Winnipeg data center; server automatically shut down for protection.","timestamp":"25-10-06 07:45:00,000000000","status":"Active","server_id":110}
+,{"alert_id":7002,"alert_type":"Network","severity":"High","description":"Packet loss exceeding 70% detected on Winnipeg server network interface; connection unstable.","timestamp":"25-10-06 07:30:00,000000000","status":"Resolved","server_id":110}
+,{"alert_id":7003,"alert_type":"Temperature","severity":"Medium","description":"CPU temperature fluctuated above 75°C during firmware update; cooling systems temporarily increased load.","timestamp":"25-10-06 10:50:00,000000000","status":"Acknowledged","server_id":111}
+,{"alert_id":7004,"alert_type":"Maintenance","severity":"Low","description":"Firmware patch verification pending; awaiting technician confirmation post-reboot.","timestamp":"25-10-06 11:10:00,000000000","status":"Active","server_id":111}
+]}]}
+
+---------------
+MAINTENANCE TABLE:
+{"results":[{"columns":[{"name":"MAINTENANCE_ID","type":"NUMBER"},{"name":"SERVER_ID","type":"NUMBER"},{"name":"MAINTENANCE_TYPE","type":"VARCHAR2"},{"name":"USER_ID","type":"NUMBER"},{"name":"STATUS","type":"VARCHAR2"},{"name":"TIMESTAMP","type":"TIMESTAMP"},{"name":"NOTES","type":"VARCHAR2"}],"items":
+[
+{"maintenance_id":9001,"server_id":111,"maintenance_type":"firmware","user_id":3,"status":"in_progress","timestamp":"25-10-06 10:45:00,000000000","notes":"Applied BIOS and firmware update; system rebooted successfully"}
+,{"maintenance_id":9002,"server_id":112,"maintenance_type":"hardware","user_id":2,"status":"completed","timestamp":"25-10-05 14:30:00,000000000","notes":"Replaced chassis fan; verified stable airflow and temperature"}
+,{"maintenance_id":9003,"server_id":109,"maintenance_type":"patch","user_id":5,"status":"completed","timestamp":"25-10-01 09:15:00,000000000","notes":"Applied October OS security patch; reboot verified and logged"}
+,{"maintenance_id":9004,"server_id":110,"maintenance_type":"inspection","user_id":4,"status":"scheduled","timestamp":"25-10-03 11:00:00,000000000","notes":"Performed power-down inspection and verified all cables and labels"}
+,{"maintenance_id":9005,"server_id":101,"maintenance_type":"preventive","user_id":1,"status":"scheduled","timestamp":"25-10-08 08:00:00,000000000","notes":"Planned quarterly preventive maintenance for firmware checks and cleaning"}
+]}]}
+
+----------------
+USERS TABLE:
+{"results":[{"columns":[{"name":"USER_ID","type":"NUMBER"},{"name":"NAME","type":"VARCHAR2"},{"name":"EMAIL","type":"VARCHAR2"},{"name":"ROLE","type":"VARCHAR2"},{"name":"ACCESS_LEVEL","type":"VARCHAR2"}],"items":
+[
+{"user_id":1,"name":"Mohammad","email":"mohammad@datacenter.com","role":"System Administrator","access_level":"High"}
+,{"user_id":2,"name":"Abdul","email":"abdul@datacenter.com","role":"Technician","access_level":"Medium"}
+,{"user_id":3,"name":"Zein","email":"zein@datacenter.com","role":"Network Engineer","access_level":"Medium"}
+,{"user_id":4,"name":"Omar","email":"omar@datacenter.com","role":"Operations Manager","access_level":"High"}
+,{"user_id":5,"name":"Sarah","email":"sarah@datacenter.com","role":"Support Staff","access_level":"Low"}
+]}]}
+
+--------------
+SERVERS TABLE:
+{"results":[{"columns":[{"name":"SERVER_ID","type":"NUMBER"},{"name":"SERVER_NAME","type":"VARCHAR2"},{"name":"MODEL","type":"VARCHAR2"},{"name":"PROCESSOR_TYPE","type":"VARCHAR2"},{"name":"RAM","type":"NUMBER"},{"name":"STORAGE","type":"NUMBER"},{"name":"STATUS","type":"VARCHAR2"},{"name":"LOCATION","type":"VARCHAR2"}],"items":
+[
+{"server_id":101,"server_name":"srv-tor-01","model":"Dell PowerEdge R740","processor_type":"Intel Xeon Silver 4214","ram":128,"storage":8,"status":"active","location":"Toronto"}
+,{"server_id":109,"server_name":"srv-hfx-01","model":"Dell PowerEdge R650","processor_type":"Intel Xeon Gold 5318Y","ram":128,"storage":8,"status":"active","location":"Halifax"}
+,{"server_id":110,"server_name":"srv-wpg-01","model":"HP ProLiant DL325","processor_type":"AMD EPYC 7453","ram":96,"storage":6,"status":"inactive","location":"Winnipeg"}
+,{"server_id":111,"server_name":"srv-ott-02","model":"Lenovo ThinkSystem SR630","processor_type":"Intel Xeon Silver 4310","ram":64,"storage":4,"status":"maintenance","location":"Ottawa"}
+,{"server_id":112,"server_name":"srv-tor-03","model":"Cisco UCS C240 M6","processor_type":"AMD EPYC 9354P","ram":256,"storage":12,"status":"active","location":"Toronto"}
+]}]}
+
+-----------------
+PERFORMANCE_METRICS:
+{"results":[{"columns":[{"name":"METRIC_ID","type":"NUMBER"},{"name":"SERVER_ID","type":"NUMBER"},{"name":"METRIC_TYPE","type":"VARCHAR2"},{"name":"METRIC_VALUE","type":"VARCHAR2"},{"name":"TIMESTAMP","type":"TIMESTAMP"}],"items":
+[
+{"metric_id":8001,"server_id":101,"metric_type":"cpu_util","metric_value":"42","timestamp":"25-10-06 10:00:00,000000000"}
+,{"metric_id":8002,"server_id":101,"metric_type":"memory_util","metric_value":"58","timestamp":"25-10-06 10:00:00,000000000"}
+,{"metric_id":8003,"server_id":101,"metric_type":"cpu_util","metric_value":"55","timestamp":"25-10-06 10:20:00,000000000"}
+,{"metric_id":8004,"server_id":101,"metric_type":"memory_util","metric_value":"65","timestamp":"25-10-06 10:20:00,000000000"}
+,{"metric_id":8006,"server_id":109,"metric_type":"memory_util","metric_value":"50","timestamp":"25-10-06 10:05:00,000000000"}
+,{"metric_id":8007,"server_id":109,"metric_type":"cpu_util","metric_value":"38","timestamp":"25-10-06 10:25:00,000000000"}
+,{"metric_id":8008,"server_id":109,"metric_type":"memory_util","metric_value":"52","timestamp":"25-10-06 10:25:00,000000000"}
+,{"metric_id":8009,"server_id":110,"metric_type":"cpu_util","metric_value":"0","timestamp":"25-10-06 10:10:00,000000000"}
+,{"metric_id":8010,"server_id":110,"metric_type":"memory_util","metric_value":"0","timestamp":"25-10-06 10:10:00,000000000"}
+,{"metric_id":8011,"server_id":110,"metric_type":"cpu_util","metric_value":"0","timestamp":"25-10-06 10:30:00,000000000"}
+,{"metric_id":8012,"server_id":110,"metric_type":"memory_util","metric_value":"0","timestamp":"25-10-06 10:30:00,000000000"}
+,{"metric_id":8013,"server_id":111,"metric_type":"cpu_util","metric_value":"3","timestamp":"25-10-06 10:15:00,000000000"}
+,{"metric_id":8014,"server_id":111,"metric_type":"memory_util","metric_value":"4.5","timestamp":"25-10-06 10:15:00,000000000"}
+,{"metric_id":8015,"server_id":111,"metric_type":"cpu_util","metric_value":"2","timestamp":"25-10-06 10:35:00,000000000"}
+,{"metric_id":8016,"server_id":111,"metric_type":"memory_util","metric_value":"3.5","timestamp":"25-10-06 10:35:00,000000000"}
+,{"metric_id":8017,"server_id":112,"metric_type":"cpu_util","metric_value":"63","timestamp":"25-10-06 10:18:00,000000000"}
+,{"metric_id":8018,"server_id":112,"metric_type":"memory_util","metric_value":"68","timestamp":"25-10-06 10:18:00,000000000"}
+,{"metric_id":8019,"server_id":112,"metric_type":"cpu_util","metric_value":"70","timestamp":"25-10-06 10:38:00,000000000"}
+,{"metric_id":8020,"server_id":112,"metric_type":"memory_util","metric_value":"72","timestamp":"25-10-06 10:38:00,000000000"}
+,{"metric_id":8005,"server_id":109,"metric_type":"cpu_util","metric_value":"35","timestamp":"25-10-06 10:05:00,000000000"}
+]}]}
+
+---------------------
+ENVIROMENTAL_SENSORS:
+{"results":[{"columns":[{"name":"SENSOR_ID","type":"NUMBER"},{"name":"SENSOR_TYPE","type":"VARCHAR2"},{"name":"SENSOR_VALUE","type":"NUMBER"},{"name":"LOCATION","type":"VARCHAR2"},{"name":"TIMESTAMP","type":"TIMESTAMP"},{"name":"SENSOR_SERVER_ID","type":"NUMBER"}],"items":
+[
+{"sensor_id":2001,"sensor_type":"temperature","sensor_value":23,5,"location":"Toronto","timestamp":"06-10-25 09:30:00,000000000"}
+,{"sensor_id":2002,"sensor_type":"temperature","sensor_value":22,1,"location":"Halifax","timestamp":"06-10-25 09:40:00,000000000"}
+,{"sensor_id":2003,"sensor_type":"temperature","sensor_value":21,3,"location":"Winnipeg","timestamp":"06-10-25 09:45:00,000000000"}
+,{"sensor_id":2004,"sensor_type":"humidity","sensor_value":47,8,"location":"Ottawa","timestamp":"06-10-25 09:50:00,000000000"}
+,{"sensor_id":2005,"sensor_type":"humidity","sensor_value":44,5,"location":"Toronto","timestamp":"06-10-25 09:55:00,000000000"}
+]}]}
